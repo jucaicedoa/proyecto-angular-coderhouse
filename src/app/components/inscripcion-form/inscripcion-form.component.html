@@ -1,0 +1,52 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ isEditMode ? 'Editar Inscripción' : 'Nueva Inscripción' }}</mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <form [formGroup]="inscripcionForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Alumno</mat-label>
+          <mat-select formControlName="alumnoId">
+            <mat-option *ngFor="let alumno of alumnos" [value]="alumno.id">
+              {{ alumno.nombre }} {{ alumno.apellido }}
+            </mat-option>
+          </mat-select>
+          <mat-error>{{ getErrorMessage('alumnoId') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Curso</mat-label>
+          <mat-select formControlName="cursoId">
+            <mat-option *ngFor="let curso of cursos" [value]="curso.id">
+              {{ curso.nombre }} ({{ curso.cupoDisponible }} cupos disponibles)
+            </mat-option>
+          </mat-select>
+          <mat-error>{{ getErrorMessage('cursoId') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="estado">
+            <mat-option value="Activa">Activa</mat-option>
+            <mat-option value="Cancelada">Cancelada</mat-option>
+            <mat-option value="Completada">Completada</mat-option>
+          </mat-select>
+          <mat-error>{{ getErrorMessage('estado') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="button-container">
+        <button mat-raised-button type="button" (click)="cancelar()" class="cancel-button">
+          Cancelar
+        </button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="inscripcionForm.invalid">
+          {{ isEditMode ? 'Actualizar' : 'Crear' }}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
