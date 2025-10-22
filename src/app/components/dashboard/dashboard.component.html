@@ -1,0 +1,61 @@
+<div class="dashboard-container">
+  <h1>Dashboard - Sistema de Gestión de Cursos</h1>
+  
+  <mat-grid-list cols="2" rowHeight="200px" gutterSize="16px">
+    <mat-grid-tile>
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <div class="stat-content">
+            <mat-icon class="stat-icon">people</mat-icon>
+            <div class="stat-info">
+              <h2>{{ totalAlumnos }}</h2>
+              <p>Total Alumnos</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <div class="stat-content">
+            <mat-icon class="stat-icon">school</mat-icon>
+            <div class="stat-info">
+              <h2>{{ totalCursos }}</h2>
+              <p>Total Cursos</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <div class="stat-content">
+            <mat-icon class="stat-icon">assignment</mat-icon>
+            <div class="stat-info">
+              <h2>{{ totalInscripciones }}</h2>
+              <p>Total Inscripciones</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <div class="stat-content">
+            <mat-icon class="stat-icon">check_circle</mat-icon>
+            <div class="stat-info">
+              <h2>{{ alumnosActivos }}</h2>
+              <p>Alumnos Activos</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
