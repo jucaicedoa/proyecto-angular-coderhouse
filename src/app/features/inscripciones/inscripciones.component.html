@@ -1,0 +1,65 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Lista de Inscripciones</mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <div class="toolbar">
+      <button mat-raised-button color="primary" (click)="agregarInscripcion()">
+        <mat-icon>add</mat-icon>
+        Nueva Inscripción
+      </button>
+    </div>
+
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Alumno Column -->
+        <ng-container matColumnDef="alumno">
+          <th mat-header-cell *matHeaderCellDef> Alumno </th>
+          <td mat-cell *matCellDef="let inscripcion"> 
+            {{ inscripcion.alumno ? inscripcion.alumno.nombre + ' ' + inscripcion.alumno.apellido : 'N/A' }}
+          </td>
+        </ng-container>
+
+        <!-- Curso Column -->
+        <ng-container matColumnDef="curso">
+          <th mat-header-cell *matHeaderCellDef> Curso </th>
+          <td mat-cell *matCellDef="let inscripcion"> 
+            {{ inscripcion.curso ? inscripcion.curso.nombre : 'N/A' }}
+          </td>
+        </ng-container>
+
+        <!-- Fecha Inscripción Column -->
+        <ng-container matColumnDef="fechaInscripcion">
+          <th mat-header-cell *matHeaderCellDef> Fecha de Inscripción </th>
+          <td mat-cell *matCellDef="let inscripcion"> {{formatearFecha(inscripcion.fechaInscripcion)}} </td>
+        </ng-container>
+
+        <!-- Estado Column -->
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let inscripcion">
+            <span [class]="inscripcion.estado === 'Activa' ? 'status-active' : 'status-inactive'">
+              {{inscripcion.estado}}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="acciones" *ngIf="isAdmin">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let inscripcion">
+            <button mat-icon-button color="warn" (click)="eliminarInscripcion(inscripcion)" title="Eliminar">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
