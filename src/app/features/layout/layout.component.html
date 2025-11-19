@@ -6,15 +6,15 @@
         <mat-icon>dashboard</mat-icon>
         <span>Dashboard</span>
       </a>
-      <a mat-list-item routerLink="/alumnos">
+      <a mat-list-item routerLink="/dashboard/alumnos">
         <mat-icon>people</mat-icon>
         <span>Alumnos</span>
       </a>
-      <a mat-list-item routerLink="/cursos">
+      <a mat-list-item routerLink="/dashboard/cursos">
         <mat-icon>school</mat-icon>
         <span>Cursos</span>
       </a>
-      <a mat-list-item routerLink="/inscripciones">
+      <a mat-list-item routerLink="/dashboard/inscripciones" *ngIf="isAdmin">
         <mat-icon>assignment</mat-icon>
         <span>Inscripciones</span>
       </a>
@@ -27,9 +27,9 @@
         <mat-icon aria-label="Menu">menu</mat-icon>
       </button>
       <span class="flex"></span>
-      <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="currentUser">
+      <button mat-button [matMenuTriggerFor]="userMenu" *ngIf="currentUser as user">
         <mat-icon>account_circle</mat-icon>
-        {{ currentUser?.nombre }} {{ currentUser?.apellido }}
+        {{ user.nombre }} {{ user.apellido }}
       </button>
       <mat-menu #userMenu="matMenu">
         <button mat-menu-item (click)="logout()">

@@ -72,7 +72,7 @@ export class InscripcionesComponent implements OnInit, OnDestroy {
   }
 
   agregarInscripcion(): void {
-    this.router.navigate(['/inscripciones/nueva']);
+    this.router.navigate(['/dashboard/inscripciones/nueva']);
   }
 
   eliminarInscripcion(inscripcion: Inscripcion): void {

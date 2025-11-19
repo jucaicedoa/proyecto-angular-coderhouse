@@ -99,14 +99,14 @@ export class InscripcionFormComponent implements OnInit, OnDestroy {
         this.snackBar.open('Inscripción creada correctamente', 'Cerrar', { duration: 3000 });
       }
       
-      this.router.navigate(['/inscripciones']);
+      this.router.navigate(['/dashboard/inscripciones']);
     } else {
       this.snackBar.open('Por favor, complete todos los campos requeridos', 'Cerrar', { duration: 3000 });
     }
   }
 
   cancelar(): void {
-    this.router.navigate(['/inscripciones']);
+    this.router.navigate(['/dashboard/inscripciones']);
   }
 
   getErrorMessage(fieldName: string): string {
