@@ -5,7 +5,7 @@
   
   <mat-card-content>
     <div class="toolbar">
-      <button mat-raised-button color="primary" (click)="agregarInscripcion()">
+      <button mat-raised-button color="primary" (click)="agregarInscripcion()" *ngIf="isAdmin">
         <mat-icon>add</mat-icon>
         Nueva Inscripción
       </button>

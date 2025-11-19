@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { Subject, takeUntil } from 'rxjs';
 import { AlumnoService } from '../../core/services/alumno.service';
@@ -8,7 +9,7 @@ import { InscripcionService } from '../../core/services/inscripcion.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
