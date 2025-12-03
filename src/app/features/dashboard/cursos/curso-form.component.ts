@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { Subject, takeUntil } from 'rxjs';
-import { Curso } from '../../core/models/curso.interface';
-import { CursoService } from '../../core/services/curso.service';
+import { Curso } from '../../../core/models/curso.interface';
+import { CursoService } from '../../../core/services/curso.service';
 
 @Component({
   selector: 'app-curso-form',
@@ -84,14 +84,14 @@ export class CursoFormComponent implements OnInit, OnDestroy {
         this.snackBar.open('Curso creado correctamente', 'Cerrar', { duration: 3000 });
       }
       
-      this.router.navigate(['/cursos']);
+      this.router.navigate(['/dashboard/cursos']);
     } else {
       this.snackBar.open('Por favor, complete todos los campos requeridos', 'Cerrar', { duration: 3000 });
     }
   }
 
   cancelar(): void {
-    this.router.navigate(['/cursos']);
+    this.router.navigate(['/dashboard/cursos']);
   }
 
   getErrorMessage(fieldName: string): string {
@@ -108,5 +108,3 @@ export class CursoFormComponent implements OnInit, OnDestroy {
     return '';
   }
 }
-
-

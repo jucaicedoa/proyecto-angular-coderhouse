@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { Subject, takeUntil, combineLatest } from 'rxjs';
-import { Inscripcion } from '../../core/models/inscripcion.interface';
-import { Alumno } from '../../core/models/alumno.interface';
-import { Curso } from '../../core/models/curso.interface';
-import { InscripcionService } from '../../core/services/inscripcion.service';
-import { AlumnoService } from '../../core/services/alumno.service';
-import { CursoService } from '../../core/services/curso.service';
-import { AuthService } from '../../core/services/auth.service';
+import { Inscripcion } from '../../../core/models/inscripcion.interface';
+import { Alumno } from '../../../core/models/alumno.interface';
+import { Curso } from '../../../core/models/curso.interface';
+import { InscripcionService } from '../../../core/services/inscripcion.service';
+import { AlumnoService } from '../../../core/services/alumno.service';
+import { CursoService } from '../../../core/services/curso.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-inscripciones',
@@ -99,5 +99,3 @@ export class InscripcionesComponent implements OnInit, OnDestroy {
     return curso ? curso.nombre : 'N/A';
   }
 }
-
-

@@ -7,5 +7,3 @@ export const CURSOS_ROUTES: Routes = [
   { path: 'nuevo', component: CursoFormComponent },
   { path: 'editar/:id', component: CursoFormComponent }
 ];
-
-

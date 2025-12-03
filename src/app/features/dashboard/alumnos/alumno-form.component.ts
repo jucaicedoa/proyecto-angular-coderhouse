@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { Subject, takeUntil } from 'rxjs';
-import { Alumno } from '../../core/models/alumno.interface';
-import { AlumnoService } from '../../core/services/alumno.service';
+import { Alumno } from '../../../core/models/alumno.interface';
+import { AlumnoService } from '../../../core/services/alumno.service';
 
 @Component({
   selector: 'app-alumno-form',
@@ -82,14 +82,14 @@ export class AlumnoFormComponent implements OnInit, OnDestroy {
         this.snackBar.open('Alumno creado correctamente', 'Cerrar', { duration: 3000 });
       }
       
-      this.router.navigate(['/alumnos']);
+      this.router.navigate(['/dashboard/alumnos']);
     } else {
       this.snackBar.open('Por favor, complete todos los campos requeridos', 'Cerrar', { duration: 3000 });
     }
   }
 
   cancelar(): void {
-    this.router.navigate(['/alumnos']);
+    this.router.navigate(['/dashboard/alumnos']);
   }
 
   getErrorMessage(fieldName: string): string {
@@ -109,5 +109,3 @@ export class AlumnoFormComponent implements OnInit, OnDestroy {
     return '';
   }
 }
-
-

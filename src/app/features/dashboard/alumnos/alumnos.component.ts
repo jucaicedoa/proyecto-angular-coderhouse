@@ -1,19 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
-import { Alumno } from '../../core/models/alumno.interface';
-import { AlumnoService } from '../../core/services/alumno.service';
-import { AuthService } from '../../core/services/auth.service';
+import { Alumno } from '../../../core/models/alumno.interface';
+import { AlumnoService } from '../../../core/services/alumno.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-alumnos',
   standalone: true,
   imports: [SharedModule],
   templateUrl: './alumnos.component.html',
-  styleUrl: './alumnos.component.css'
+  styleUrls: ['./alumnos.component.css']
 })
 export class AlumnosComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['nombre', 'apellido', 'email', 'telefono', 'fechaNacimiento', 'activo', 'acciones'];
@@ -50,11 +50,11 @@ export class AlumnosComponent implements OnInit, OnDestroy {
   }
 
   agregarAlumno(): void {
-    this.router.navigate(['/alumnos/nuevo']);
+    this.router.navigate(['/dashboard/alumnos/nuevo']);
   }
 
   editarAlumno(alumno: Alumno): void {
-    this.router.navigate(['/alumnos/editar', alumno.id]);
+    this.router.navigate(['/dashboard/alumnos/editar', alumno.id]);
   }
 
   eliminarAlumno(alumno: Alumno): void {
@@ -68,5 +68,3 @@ export class AlumnosComponent implements OnInit, OnDestroy {
     return new Date(fecha).toLocaleDateString('es-ES');
   }
 }
-
-

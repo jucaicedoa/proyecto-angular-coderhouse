@@ -7,5 +7,3 @@ export const INSCRIPCIONES_ROUTES: Routes = [
   { path: 'nueva', component: InscripcionFormComponent },
   { path: 'editar/:id', component: InscripcionFormComponent }
 ];
-
-

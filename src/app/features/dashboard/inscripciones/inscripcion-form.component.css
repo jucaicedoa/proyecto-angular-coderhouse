@@ -8,12 +8,6 @@
   flex: 1;
 }
 
-.checkbox-container {
-  display: flex;
-  align-items: center;
-  padding-top: 8px;
-}
-
 .button-container {
   display: flex;
   justify-content: flex-end;
@@ -33,5 +27,3 @@ mat-card {
 mat-form-field {
   width: 100%;
 }
-
-

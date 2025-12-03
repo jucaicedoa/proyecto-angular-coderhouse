@@ -7,5 +7,3 @@ export const ALUMNOS_ROUTES: Routes = [
   { path: 'nuevo', component: AlumnoFormComponent },
   { path: 'editar/:id', component: AlumnoFormComponent }
 ];
-
-

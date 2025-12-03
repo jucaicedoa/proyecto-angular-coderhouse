@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { Subject, takeUntil } from 'rxjs';
-import { Curso } from '../../core/models/curso.interface';
-import { CursoService } from '../../core/services/curso.service';
-import { AuthService } from '../../core/services/auth.service';
+import { Curso } from '../../../core/models/curso.interface';
+import { CursoService } from '../../../core/services/curso.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-cursos',
@@ -48,11 +48,11 @@ export class CursosComponent implements OnInit, OnDestroy {
   }
 
   agregarCurso(): void {
-    this.router.navigate(['/cursos/nuevo']);
+    this.router.navigate(['/dashboard/cursos/nuevo']);
   }
 
   editarCurso(curso: Curso): void {
-    this.router.navigate(['/cursos/editar', curso.id]);
+    this.router.navigate(['/dashboard/cursos/editar', curso.id]);
   }
 
   eliminarCurso(curso: Curso): void {
@@ -66,5 +66,3 @@ export class CursosComponent implements OnInit, OnDestroy {
     return new Date(fecha).toLocaleDateString('es-ES');
   }
 }
-
-

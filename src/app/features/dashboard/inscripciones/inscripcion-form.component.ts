@@ -3,14 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { Subject, takeUntil, combineLatest } from 'rxjs';
-import { Inscripcion } from '../../core/models/inscripcion.interface';
-import { Alumno } from '../../core/models/alumno.interface';
-import { Curso } from '../../core/models/curso.interface';
-import { InscripcionService } from '../../core/services/inscripcion.service';
-import { AlumnoService } from '../../core/services/alumno.service';
-import { CursoService } from '../../core/services/curso.service';
+import { Inscripcion } from '../../../core/models/inscripcion.interface';
+import { Alumno } from '../../../core/models/alumno.interface';
+import { Curso } from '../../../core/models/curso.interface';
+import { InscripcionService } from '../../../core/services/inscripcion.service';
+import { AlumnoService } from '../../../core/services/alumno.service';
+import { CursoService } from '../../../core/services/curso.service';
 
 @Component({
   selector: 'app-inscripcion-form',
@@ -117,5 +117,3 @@ export class InscripcionFormComponent implements OnInit, OnDestroy {
     return '';
   }
 }
-
-
