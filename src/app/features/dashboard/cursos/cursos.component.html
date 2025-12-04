@@ -1,0 +1,87 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Lista de Cursos</mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <div class="toolbar" *ngIf="isAdmin">
+      <button mat-raised-button color="primary" (click)="agregarCurso()">
+        <mat-icon>add</mat-icon>
+        Agregar Curso
+      </button>
+    </div>
+
+    <!-- Indicador de carga -->
+    <div *ngIf="isLoading$ | async" class="loading-container">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Cargando cursos...</p>
+    </div>
+
+    <!-- Tabla de cursos -->
+    <div class="table-container" *ngIf="!(isLoading$ | async)">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Nombre Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let curso"> {{curso.nombre}} </td>
+        </ng-container>
+
+        <!-- Descripción Column -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> Descripción </th>
+          <td mat-cell *matCellDef="let curso"> {{curso.descripcion}} </td>
+        </ng-container>
+
+        <!-- Fecha Inicio Column -->
+        <ng-container matColumnDef="fechaInicio">
+          <th mat-header-cell *matHeaderCellDef> Fecha Inicio </th>
+          <td mat-cell *matCellDef="let curso"> {{formatearFecha(curso.fechaInicio)}} </td>
+        </ng-container>
+
+        <!-- Fecha Fin Column -->
+        <ng-container matColumnDef="fechaFin">
+          <th mat-header-cell *matHeaderCellDef> Fecha Fin </th>
+          <td mat-cell *matCellDef="let curso"> {{formatearFecha(curso.fechaFin)}} </td>
+        </ng-container>
+
+        <!-- Cupo Máximo Column -->
+        <ng-container matColumnDef="cupoMaximo">
+          <th mat-header-cell *matHeaderCellDef> Cupo Máximo </th>
+          <td mat-cell *matCellDef="let curso"> {{curso.cupoMaximo}} </td>
+        </ng-container>
+
+        <!-- Cupo Disponible Column -->
+        <ng-container matColumnDef="cupoDisponible">
+          <th mat-header-cell *matHeaderCellDef> Cupo Disponible </th>
+          <td mat-cell *matCellDef="let curso"> {{curso.cupoDisponible}} </td>
+        </ng-container>
+
+        <!-- Activo Column -->
+        <ng-container matColumnDef="activo">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let curso">
+            <span [class]="curso.activo ? 'status-active' : 'status-inactive'">
+              {{curso.activo ? 'Activo' : 'Inactivo'}}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="acciones" *ngIf="isAdmin">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let curso">
+            <button mat-icon-button color="primary" (click)="editarCurso(curso)" title="Editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="eliminarCurso(curso)" title="Eliminar">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

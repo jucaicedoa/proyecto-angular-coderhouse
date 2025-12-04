@@ -9,19 +9,21 @@ export const DASHBOARD_ROUTES: Routes = [
     children: [
       {
         path: 'alumnos',
-        loadChildren: () => import('../alumnos/alumnos.routes').then(m => m.ALUMNOS_ROUTES)
+        loadChildren: () => import('./alumnos/alumnos.routes').then(m => m.ALUMNOS_ROUTES)
       },
       {
         path: 'cursos',
-        loadChildren: () => import('../cursos/cursos.routes').then(m => m.CURSOS_ROUTES)
+        loadChildren: () => import('./cursos/cursos.routes').then(m => m.CURSOS_ROUTES)
       },
       {
         path: 'inscripciones',
+        loadChildren: () => import('./inscripciones/inscripciones.routes').then(m => m.INSCRIPCIONES_ROUTES)
+      },
+      {
+        path: 'usuarios',
         canActivate: [adminGuard],
-        loadChildren: () => import('../inscripciones/inscripciones.routes').then(m => m.INSCRIPCIONES_ROUTES)
+        loadChildren: () => import('./usuarios/usuarios.routes').then(m => m.USUARIOS_ROUTES)
       }
     ]
   }
 ];
-
-

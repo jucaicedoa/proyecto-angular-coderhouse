@@ -1,0 +1,74 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Lista de Alumnos</mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <div class="toolbar" *ngIf="isAdmin">
+      <button mat-raised-button color="primary" (click)="agregarAlumno()">
+        <mat-icon>add</mat-icon>
+        Agregar Alumno
+      </button>
+    </div>
+
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Nombre Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let alumno"> {{alumno.nombre}} </td>
+        </ng-container>
+
+        <!-- Apellido Column -->
+        <ng-container matColumnDef="apellido">
+          <th mat-header-cell *matHeaderCellDef> Apellido </th>
+          <td mat-cell *matCellDef="let alumno"> {{alumno.apellido}} </td>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let alumno"> {{alumno.email}} </td>
+        </ng-container>
+
+        <!-- Teléfono Column -->
+        <ng-container matColumnDef="telefono">
+          <th mat-header-cell *matHeaderCellDef> Teléfono </th>
+          <td mat-cell *matCellDef="let alumno"> {{alumno.telefono}} </td>
+        </ng-container>
+
+        <!-- Fecha Nacimiento Column -->
+        <ng-container matColumnDef="fechaNacimiento">
+          <th mat-header-cell *matHeaderCellDef> Fecha de Nacimiento </th>
+          <td mat-cell *matCellDef="let alumno"> {{formatearFecha(alumno.fechaNacimiento)}} </td>
+        </ng-container>
+
+        <!-- Activo Column -->
+        <ng-container matColumnDef="activo">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let alumno">
+            <span [class]="alumno.activo ? 'status-active' : 'status-inactive'">
+              {{alumno.activo ? 'Activo' : 'Inactivo'}}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="acciones" *ngIf="isAdmin">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let alumno">
+            <button mat-icon-button color="primary" (click)="editarAlumno(alumno)" title="Editar">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="eliminarAlumno(alumno)" title="Eliminar">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

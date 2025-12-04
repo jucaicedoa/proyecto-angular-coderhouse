@@ -1,0 +1,83 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ isEditMode ? 'Editar Usuario' : 'Nuevo Usuario' }}</mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" placeholder="Nombre">
+          <mat-error>{{ getErrorMessage('nombre') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Apellido</mat-label>
+          <input matInput formControlName="apellido" placeholder="Apellido">
+          <mat-error>{{ getErrorMessage('apellido') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="email@ejemplo.com">
+          <mat-error>{{ getErrorMessage('email') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" formControlName="password" [placeholder]="isEditMode ? 'Dejar vacío para no cambiar' : 'Contraseña'">
+          <mat-error>{{ getErrorMessage('password') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Dirección</mat-label>
+          <input matInput formControlName="direccion" placeholder="Dirección">
+          <mat-error>{{ getErrorMessage('direccion') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="telefono" placeholder="Teléfono">
+          <mat-error>{{ getErrorMessage('telefono') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Perfil</mat-label>
+          <input matInput formControlName="perfil" placeholder="Perfil del usuario">
+          <mat-error>{{ getErrorMessage('perfil') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Rol</mat-label>
+          <mat-select formControlName="rol">
+            <mat-option value="Usuario">Usuario</mat-option>
+            <mat-option value="Admin">Admin</mat-option>
+          </mat-select>
+          <mat-error>{{ getErrorMessage('rol') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <div class="checkbox-container">
+          <mat-checkbox formControlName="activo">Usuario Activo</mat-checkbox>
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button mat-raised-button type="button" (click)="cancelar()" class="cancel-button">
+          Cancelar
+        </button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="usuarioForm.invalid">
+          {{ isEditMode ? 'Actualizar' : 'Crear' }}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

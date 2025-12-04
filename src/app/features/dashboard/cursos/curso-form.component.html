@@ -1,0 +1,92 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ isEditMode ? 'Editar Curso' : 'Nuevo Curso' }}</mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <form [formGroup]="cursoForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombre del Curso</mat-label>
+          <input matInput formControlName="nombre" placeholder="Nombre del curso">
+          <mat-error>{{ getErrorMessage('nombre') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="descripcion" placeholder="Descripción del curso" rows="3"></textarea>
+          <mat-error>{{ getErrorMessage('descripcion') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="third-width">
+          <mat-label>Cantidad de Horas</mat-label>
+          <input matInput type="number" formControlName="cantidadHoras" placeholder="Horas">
+          <mat-error>{{ getErrorMessage('cantidadHoras') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="third-width">
+          <mat-label>Cantidad de Clases</mat-label>
+          <input matInput type="number" formControlName="cantidadClases" placeholder="Clases">
+          <mat-error>{{ getErrorMessage('cantidadClases') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="third-width">
+          <mat-label>Nombre del Profesor</mat-label>
+          <input matInput formControlName="nombreProfesor" placeholder="Profesor">
+          <mat-error>{{ getErrorMessage('nombreProfesor') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Fecha de Inicio</mat-label>
+          <input matInput [matDatepicker]="inicioPicker" formControlName="fechaInicio">
+          <mat-datepicker-toggle matSuffix [for]="inicioPicker"></mat-datepicker-toggle>
+          <mat-datepicker #inicioPicker></mat-datepicker>
+          <mat-error>{{ getErrorMessage('fechaInicio') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Fecha de Fin</mat-label>
+          <input matInput [matDatepicker]="finPicker" formControlName="fechaFin">
+          <mat-datepicker-toggle matSuffix [for]="finPicker"></mat-datepicker-toggle>
+          <mat-datepicker #finPicker></mat-datepicker>
+          <mat-error>{{ getErrorMessage('fechaFin') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Cupo Máximo</mat-label>
+          <input matInput type="number" formControlName="cupoMaximo" placeholder="Cupo máximo">
+          <mat-error>{{ getErrorMessage('cupoMaximo') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Cupo Disponible</mat-label>
+          <input matInput type="number" formControlName="cupoDisponible" placeholder="Cupo disponible">
+          <mat-error>{{ getErrorMessage('cupoDisponible') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <div class="checkbox-container">
+          <mat-checkbox formControlName="activo">Curso Activo</mat-checkbox>
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button mat-raised-button type="button" (click)="cancelar()" class="cancel-button">
+          Cancelar
+        </button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="cursoForm.invalid">
+          {{ isEditMode ? 'Actualizar' : 'Crear' }}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
