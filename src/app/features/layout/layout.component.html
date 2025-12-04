@@ -14,9 +14,13 @@
         <mat-icon>school</mat-icon>
         <span>Cursos</span>
       </a>
-      <a mat-list-item routerLink="/dashboard/inscripciones" *ngIf="isAdmin">
+      <a mat-list-item routerLink="/dashboard/inscripciones">
         <mat-icon>assignment</mat-icon>
         <span>Inscripciones</span>
+      </a>
+      <a mat-list-item routerLink="/dashboard/usuarios" *ngIf="isAdmin">
+        <mat-icon>people_outline</mat-icon>
+        <span>Usuarios</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -44,5 +48,3 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-

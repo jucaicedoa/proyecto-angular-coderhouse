@@ -11,6 +11,7 @@ import { Curso } from '../../../core/models/curso.interface';
 import { InscripcionService } from '../../../core/services/inscripcion.service';
 import { AlumnoService } from '../../../core/services/alumno.service';
 import { CursoService } from '../../../core/services/curso.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-inscripcion-form',
@@ -32,6 +33,7 @@ export class InscripcionFormComponent implements OnInit, OnDestroy {
     private inscripcionService: InscripcionService,
     private alumnoService: AlumnoService,
     private cursoService: CursoService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar
@@ -90,12 +92,26 @@ export class InscripcionFormComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     if (this.inscripcionForm.valid) {
       const inscripcionData = this.inscripcionForm.value;
+      const currentUser = this.authService.getCurrentUser();
       
       if (this.isEditMode && this.inscripcionId) {
         this.inscripcionService.actualizarInscripcion(this.inscripcionId, inscripcionData);
         this.snackBar.open('Inscripción actualizada correctamente', 'Cerrar', { duration: 3000 });
       } else {
+        // Agregar el usuarioId del usuario logueado
+        if (currentUser) {
+          inscripcionData.usuarioId = currentUser.id;
+        }
         this.inscripcionService.agregarInscripcion(inscripcionData);
+        
+        // Actualizar el cupo disponible del curso
+        const curso = this.cursos.find(c => c.id === inscripcionData.cursoId);
+        if (curso && curso.cupoDisponible > 0) {
+          this.cursoService.actualizarCurso(inscripcionData.cursoId, {
+            cupoDisponible: curso.cupoDisponible - 1
+          });
+        }
+        
         this.snackBar.open('Inscripción creada correctamente', 'Cerrar', { duration: 3000 });
       }
       

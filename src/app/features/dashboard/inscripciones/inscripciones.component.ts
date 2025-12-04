@@ -37,12 +37,6 @@ export class InscripcionesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isAdmin = this.authService.isAdmin();
-    
-    // Si no es admin, ocultar la columna de acciones
-    if (!this.isAdmin) {
-      this.displayedColumns = this.displayedColumns.filter(col => col !== 'acciones');
-    }
-
     this.cargarDatos();
   }
 
@@ -81,6 +75,14 @@ export class InscripcionesComponent implements OnInit, OnDestroy {
     
     if (confirm(`¿Está seguro de que desea eliminar la inscripción de ${alumno?.nombre} ${alumno?.apellido} en ${curso?.nombre}?`)) {
       this.inscripcionService.eliminarInscripcion(inscripcion.id);
+      
+      // Devolver el cupo al curso
+      if (curso) {
+        this.cursoService.actualizarCurso(inscripcion.cursoId, {
+          cupoDisponible: curso.cupoDisponible + 1
+        });
+      }
+      
       this.snackBar.open('Inscripción eliminada correctamente', 'Cerrar', { duration: 3000 });
     }
   }

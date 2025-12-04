@@ -5,6 +5,7 @@ export interface Alumno {
   email: string;
   telefono: string;
   fechaNacimiento: Date;
+  perfil: 'Desarrollador' | 'IT' | 'Usuario Final' | 'Otro';
   activo: boolean;
   fechaCreacion: Date;
 }

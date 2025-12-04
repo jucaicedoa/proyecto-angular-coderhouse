@@ -22,6 +22,26 @@
       </div>
 
       <div class="form-row">
+        <mat-form-field appearance="outline" class="third-width">
+          <mat-label>Cantidad de Horas</mat-label>
+          <input matInput type="number" formControlName="cantidadHoras" placeholder="Horas">
+          <mat-error>{{ getErrorMessage('cantidadHoras') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="third-width">
+          <mat-label>Cantidad de Clases</mat-label>
+          <input matInput type="number" formControlName="cantidadClases" placeholder="Clases">
+          <mat-error>{{ getErrorMessage('cantidadClases') }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="third-width">
+          <mat-label>Nombre del Profesor</mat-label>
+          <input matInput formControlName="nombreProfesor" placeholder="Profesor">
+          <mat-error>{{ getErrorMessage('nombreProfesor') }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
         <mat-form-field appearance="outline" class="half-width">
           <mat-label>Fecha de Inicio</mat-label>
           <input matInput [matDatepicker]="inicioPicker" formControlName="fechaInicio">

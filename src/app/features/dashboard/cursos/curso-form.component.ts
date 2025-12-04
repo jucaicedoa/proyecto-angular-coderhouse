@@ -2,10 +2,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Store } from '@ngrx/store';
 import { SharedModule } from '../../../shared/shared.module';
 import { Subject, takeUntil } from 'rxjs';
 import { Curso } from '../../../core/models/curso.interface';
 import { CursoService } from '../../../core/services/curso.service';
+import { addCourseSuccess, updateCourseSuccess } from '../../../store/courses/courses.actions';
+import { selectCourses } from '../../../store/courses/courses.selectors';
 
 @Component({
   selector: 'app-curso-form',
@@ -22,6 +25,7 @@ export class CursoFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
+    private store: Store,
     private cursoService: CursoService,
     private route: ActivatedRoute,
     private router: Router,
@@ -30,6 +34,9 @@ export class CursoFormComponent implements OnInit, OnDestroy {
     this.cursoForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       descripcion: ['', [Validators.required, Validators.minLength(10)]],
+      cantidadHoras: ['', [Validators.required, Validators.min(1)]],
+      cantidadClases: ['', [Validators.required, Validators.min(1)]],
+      nombreProfesor: ['', [Validators.required, Validators.minLength(3)]],
       fechaInicio: ['', [Validators.required]],
       fechaFin: ['', [Validators.required]],
       cupoMaximo: ['', [Validators.required, Validators.min(1)]],
@@ -62,6 +69,9 @@ export class CursoFormComponent implements OnInit, OnDestroy {
         this.cursoForm.patchValue({
           nombre: curso.nombre,
           descripcion: curso.descripcion,
+          cantidadHoras: curso.cantidadHoras,
+          cantidadClases: curso.cantidadClases,
+          nombreProfesor: curso.nombreProfesor,
           fechaInicio: curso.fechaInicio,
           fechaFin: curso.fechaFin,
           cupoMaximo: curso.cupoMaximo,
@@ -77,10 +87,25 @@ export class CursoFormComponent implements OnInit, OnDestroy {
       const cursoData = this.cursoForm.value;
       
       if (this.isEditMode && this.cursoId) {
+        // Actualizar en el servicio
         this.cursoService.actualizarCurso(this.cursoId, cursoData);
+        // Actualizar en el store
+        const cursoActualizado: Curso = {
+          ...cursoData,
+          id: this.cursoId
+        };
+        this.store.dispatch(updateCourseSuccess({ course: cursoActualizado }));
         this.snackBar.open('Curso actualizado correctamente', 'Cerrar', { duration: 3000 });
       } else {
+        // Agregar en el servicio
         this.cursoService.agregarCurso(cursoData);
+        // Obtener el curso recién creado del servicio
+        this.cursoService.getCursos()
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(cursosList => {
+            const nuevoCurso = cursosList[cursosList.length - 1];
+            this.store.dispatch(addCourseSuccess({ course: nuevoCurso }));
+          });
         this.snackBar.open('Curso creado correctamente', 'Cerrar', { duration: 3000 });
       }
       

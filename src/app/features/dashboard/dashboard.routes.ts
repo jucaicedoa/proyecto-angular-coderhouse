@@ -17,8 +17,12 @@ export const DASHBOARD_ROUTES: Routes = [
       },
       {
         path: 'inscripciones',
-        canActivate: [adminGuard],
         loadChildren: () => import('./inscripciones/inscripciones.routes').then(m => m.INSCRIPCIONES_ROUTES)
+      },
+      {
+        path: 'usuarios',
+        canActivate: [adminGuard],
+        loadChildren: () => import('./usuarios/usuarios.routes').then(m => m.USUARIOS_ROUTES)
       }
     ]
   }

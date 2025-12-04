@@ -11,7 +11,14 @@
       </button>
     </div>
 
-    <div class="table-container">
+    <!-- Indicador de carga -->
+    <div *ngIf="isLoading$ | async" class="loading-container">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Cargando cursos...</p>
+    </div>
+
+    <!-- Tabla de cursos -->
+    <div class="table-container" *ngIf="!(isLoading$ | async)">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <!-- Nombre Column -->
         <ng-container matColumnDef="nombre">
